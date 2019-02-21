@@ -98,8 +98,10 @@ class App extends Component {
   }
 
   handleResetClick() {
-    this.setState(freshState);
-    localStorage.removeItem(localStorageKey);
+    if (window.confirm('Are you sure?')) {
+      this.setState(freshState);
+      localStorage.removeItem(localStorageKey);
+    }
   }
 
   handleInputKeyUp(index) {
