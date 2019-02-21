@@ -11,6 +11,9 @@ export default ({ correct, number, feedback, ...props }) => (
       {props.invalid && (
         <div className="text-danger">{feedback}</div>
       )}
+      {props.valid && (
+        <div className="text-success">{feedback}</div>
+      )}
     </div>
   </div>
 );

@@ -105,9 +105,6 @@ class App extends Component {
     }
   }
 
-  handleStateInput(input) {
-  }
-
   handleInputKeyUp(index) {
     return e => {
       let input = e.target.value.toUpperCase().trim();
@@ -154,7 +151,7 @@ class App extends Component {
               stateInputs: { [index]: {
                 valid: { $set: true },
                 invalid: { $set: false },
-                feedback: { $set: '' },
+                feedback: { $set: states[input] },
                 correct: { $set: false },
               }}
             }));
@@ -162,7 +159,7 @@ class App extends Component {
               value: input,
               valid: true,
               invalid: false,
-              feedback: '',
+              feedback: states[input],
               correct: true,
             };
             setTimeout(() => {
