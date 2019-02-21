@@ -105,9 +105,12 @@ class App extends Component {
     }
   }
 
+  handleStateInput(input) {
+  }
+
   handleInputKeyUp(index) {
     return e => {
-      const input = e.target.value.toUpperCase().trim();
+      let input = e.target.value.toUpperCase().trim();
       if (input === '') {
         this.setState(prevState => update(prevState, {
           stateInputs: { [index]: {
@@ -119,6 +122,13 @@ class App extends Component {
       } else {
         clearTimeout(typingTimer);
         typingTimer = setTimeout(() => {
+          if (input.length > 2) {
+            for (let key in states) {
+              if (states[key].toUpperCase() === input) {
+                input = key;
+              }
+            }
+          }
           const isInputAState = this.isInputAState(input);
           const hasInputBeenSaid = this.hasInputBeenSaid(input);
           if (!isInputAState) {
