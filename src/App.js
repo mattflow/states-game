@@ -6,6 +6,9 @@ import update from 'immutability-helper';
 import states from './states';
 import CorrectInputs from './components/CorrectInputs';
 
+let typingTimer;
+let typingTimeout = 500;
+
 function createStateInputs(states) {
   const stateInputs = [];
 
@@ -55,8 +58,6 @@ class App extends Component {
     this.state = savedState === null ? freshState : JSON.parse(savedState);
     this.state.showCorrect = false;
 
-    this.typingTimer = null;
-    this.typingTimeout = 500;
   }
 
   hasInputBeenSaid(input) {
@@ -116,7 +117,8 @@ class App extends Component {
           }}
         }));
       } else {
-        this.typingTimer = setTimeout(() => {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
           const isInputAState = this.isInputAState(input);
           const hasInputBeenSaid = this.hasInputBeenSaid(input);
           if (!isInputAState) {
@@ -161,15 +163,15 @@ class App extends Component {
                 },
                 said: { $push: [input] }
               }));
-            }, 500);
+            }, typingTimeout);
           }
-        }, this.typingTimeout);
+        }, typingTimeout);
       }
     }
   }
 
   handleInputKeyDown() {
-    clearTimeout(this.typingTimer);
+    clearTimeout(typingTimer);
   }
 
   createInput(input, index) {
@@ -181,7 +183,7 @@ class App extends Component {
         invalid={input.invalid}
         valid={input.valid}
         onChange={this.handleInputChange(index)}
-        onKeyDown={this.handleInputKeyDown(index)}
+        onKeyDown={this.handleInputKeyDown}
         onKeyUp={this.handleInputKeyUp(index)}
         feedback={input.feedback}
         disabled={input.correct}
