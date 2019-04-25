@@ -2,7 +2,7 @@
   "name": "states-game",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mattflow.github.io/states",
+  "homepage": "https://mattflow.github.io/states-game",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "gh-pages": "^2.0.1",
