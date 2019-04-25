@@ -1,5 +1,7 @@
 # States Game
 
+[mattflow.github.io/states-game](https://mattflow.github.io/states-game)
+
 A fun drinking game to play with a group of people.
 
 ## Rules
