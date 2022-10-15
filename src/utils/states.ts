@@ -44,3 +44,11 @@ export const isAState = (nameOrAbbr: string) => {
   }
   return false;
 };
+
+export const getStateName = (nameOrAbbr: string) => {
+  const formattedNameOrAbbr = formatStateProperty(nameOrAbbr);
+  if (stateAbbrSet.has(formattedNameOrAbbr)) {
+    return stateAbbrNameMap.get(formattedNameOrAbbr);
+  }
+  return formattedNameOrAbbr;
+};

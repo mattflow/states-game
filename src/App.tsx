@@ -6,7 +6,7 @@ import Feedback from "./components/Feedback";
 import GuessInput from "./components/GuessInput";
 
 function App() {
-  const [guessedSet, { has, reset }] = useSet<string>(new Set());
+  const [guessedSet, { has, reset, add }] = useSet<string>(new Set());
   const [remainingSet, setRemainingSet] = useState(new Set([...stateNameSet]));
 
   useEffect(() => {
@@ -21,7 +21,12 @@ function App() {
         remainingCount={remainingSet.size}
       />
       <div className="divider" />
-      <GuessInput guessedSet={guessedSet} />
+      <GuessInput
+        guessedSet={guessedSet}
+        addGuess={(guess: string) => {
+          add(guess);
+        }}
+      />
     </div>
   );
 }

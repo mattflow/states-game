@@ -1,8 +1,9 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { formatStateProperty, isAState } from "../utils/states";
+import { formatStateProperty, getStateName, isAState } from "../utils/states";
 
 type GuessInputProps = {
   guessedSet: Set<string>;
+  addGuess: (abbr: string) => void;
 };
 
 type StateType = "empty" | "correct" | "not a state" | "already guessed";
@@ -27,7 +28,7 @@ const getLabel = (state: StateType) => {
   return <label className="label">{getLabelText(state)}</label>;
 };
 
-const GuessInput = ({ guessedSet }: GuessInputProps) => {
+const GuessInput = ({ guessedSet, addGuess }: GuessInputProps) => {
   const [value, setValue] = useState("");
   const [state, setState] = useState<StateType>("empty");
 
@@ -37,7 +38,19 @@ const GuessInput = ({ guessedSet }: GuessInputProps) => {
       if (value === "") {
         setState("empty");
       } else if (isAState(formattedValue)) {
+        const stateName = getStateName(formattedValue);
         setState("correct");
+        if (stateName) {
+          const innerTimeoutId = setTimeout(() => {
+            addGuess(stateName);
+            setValue("");
+            setState("empty");
+          }, 500);
+          return () => {
+            clearTimeout(innerTimeoutId);
+            clearTimeout(timeoutId);
+          };
+        }
       } else {
         setState("not a state");
       }
