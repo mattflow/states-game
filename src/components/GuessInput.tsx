@@ -48,7 +48,8 @@ const GuessInput = ({ guessedSet }: GuessInputProps) => {
   }, [value]);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+    const upperCaseValue = event.target.value.toUpperCase();
+    setValue(upperCaseValue);
   };
 
   return (
