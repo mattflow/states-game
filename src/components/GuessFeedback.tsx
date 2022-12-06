@@ -6,7 +6,7 @@ export type GuessFeedbackProps = {
 };
 const GuessFeedback = ({ status, correctStateName }: GuessFeedbackProps) => {
   if (status === "already guessed") {
-    return <span className="text-error">Already guessed</span>;
+    return <span className="text-error">Drink</span>;
   }
 
   if (status === "not a state") {
