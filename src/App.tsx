@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSet } from "react-use";
 import Container from "./components/Container";
 import GuessInput, { GuessInputProps } from "./components/GuessInput";
-import GuessMap from "./components/GuessMap";
 import Header from "./components/Header";
 import Score from "./components/Score";
 import {
@@ -13,8 +12,19 @@ import {
   nameSet,
 } from "./lib/states";
 
+const localStorageKey = "guessedSet";
+const getInitialGuessed = () => {
+  const localStorageGuessed = localStorage.getItem(localStorageKey);
+  if (localStorageGuessed) {
+    return JSON.parse(localStorageGuessed) as string[];
+  }
+  return [] as string[];
+};
+
 const App = () => {
-  const [guessedSet, { has, add, reset }] = useSet<string>(new Set());
+  const [guessedSet, setGuessedSet] = useState<Set<string>>(
+    new Set(getInitialGuessed())
+  );
   const [guessed, setGuessed] = useState<string[]>([]);
   useEffect(() => {
     setGuessed([...guessedSet]);
@@ -24,8 +34,13 @@ const App = () => {
     new Set([...abbreviationSet])
   );
   useEffect(() => {
+    localStorage.setItem(localStorageKey, JSON.stringify([...guessedSet]));
     setRemainingSet(
-      new Set([...abbreviationSet].filter((abbreviation) => !has(abbreviation)))
+      new Set(
+        [...abbreviationSet].filter(
+          (abbreviation) => !guessedSet.has(abbreviation)
+        )
+      )
     );
   }, [guessedSet]);
   const [remaining, setRemaining] = useState<string[]>([]);
@@ -53,9 +68,9 @@ const App = () => {
         ) {
           const abbreviation = getAbbreviation(formattedGuess);
           if (abbreviation) {
-            if (!has(abbreviation)) {
+            if (!guessedSet.has(abbreviation)) {
               setGuessInputStatus("correct");
-              add(abbreviation);
+              setGuessedSet(new Set([...guessedSet, abbreviation]));
               const name = abbreviationNameMap.get(abbreviation);
               if (name) {
                 setCorrectStateName(name);
@@ -90,7 +105,7 @@ const App = () => {
         guessedSet={guessedSet}
         onResetClick={() => {
           setGuess("");
-          reset();
+          setGuessedSet(new Set());
         }}
       />
       <Score correct={guessed.length} remaining={remaining.length} />
