@@ -32,12 +32,6 @@ const Header = ({ guessedSet, onResetClick }: HeaderProps) => (
     <input type="checkbox" id="reset-modal" className="modal-toggle" />
     <div className="modal modal-bottom sm:modal-middle">
       <div className="modal-box relative">
-        <label
-          htmlFor="reset-modal"
-          className="btn-sm btn-circle btn absolute right-2 top-2"
-        >
-          ✕
-        </label>
         <h3 className="text-lg font-bold">Are you sure?</h3>
         <div className="modal-action">
           <label htmlFor="reset-modal" className="btn">
