@@ -3,7 +3,7 @@ type ScoreProps = {
   remaining: number;
 };
 const Score = ({ correct, remaining }: ScoreProps) => (
-  <div className="mx-2 mt-4 flex justify-between">
+  <div className="mx-2 mt-6 flex justify-between">
     <span>
       Remaining: <span className="font-semibold text-error">{remaining}</span>
     </span>

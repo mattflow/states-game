@@ -6,8 +6,8 @@ type HeaderProps = {
 };
 const Header = ({ guessedSet, onResetClick }: HeaderProps) => (
   <>
-    <div className="flex items-end justify-between">
-      <h1 className="mt-6 text-2xl font-semibold">States Game</h1>
+    <div className="mt-8 flex items-end justify-between">
+      <h1 className="text-2xl font-semibold">States Game</h1>
       <div className="space-x-2">
         <label htmlFor="cheat-modal" className="btn-sm btn">
           Cheat
