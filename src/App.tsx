@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useSet } from "react-use";
 import Container from "./components/Container";
 import GuessInput, { GuessInputProps } from "./components/GuessInput";
 import Header from "./components/Header";
