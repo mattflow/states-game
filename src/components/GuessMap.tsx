@@ -2,10 +2,9 @@ import { abbreviationDimensionMap, abbreviationSet } from "../lib/states";
 
 export type GuessMapProps = {
   guessedSet: Set<string>;
-  remainingSet: Set<string>;
 };
 
-const GuessMap = ({ guessedSet, remainingSet }: GuessMapProps) => {
+const GuessMap = ({ guessedSet }: GuessMapProps) => {
   return (
     <svg
       className="mt-4"

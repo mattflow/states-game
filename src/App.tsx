@@ -14,7 +14,7 @@ import {
 } from "./lib/states";
 
 const App = () => {
-  const [guessedSet, { has, add }] = useSet<string>(new Set());
+  const [guessedSet, { has, add, reset }] = useSet<string>(new Set());
   const [guessed, setGuessed] = useState<string[]>([]);
   useEffect(() => {
     setGuessed([...guessedSet]);
@@ -86,8 +86,13 @@ const App = () => {
 
   return (
     <Container>
-      <Header />
-      <GuessMap guessedSet={guessedSet} remainingSet={remainingSet} />
+      <Header
+        guessedSet={guessedSet}
+        onResetClick={() => {
+          setGuess("");
+          reset();
+        }}
+      />
       <Score correct={guessed.length} remaining={remaining.length} />
       <GuessInput
         value={guess}
