@@ -12,7 +12,7 @@ import {
 } from "./lib/states";
 
 const App = () => {
-  const [guessedSet, { has }] = useSet<string>(new Set());
+  const [guessedSet, { has, add }] = useSet<string>(new Set());
   const [guessed, setGuessed] = useState<string[]>([]);
   useEffect(() => {
     setGuessed([...guessedSet]);
@@ -21,6 +21,11 @@ const App = () => {
   const [remainingSet, setRemainingSet] = useState(
     new Set([...abbreviationSet])
   );
+  useEffect(() => {
+    setRemainingSet(
+      new Set([...abbreviationSet].filter((abbreviation) => !has(abbreviation)))
+    );
+  }, [guessedSet]);
   const [remaining, setRemaining] = useState<string[]>([]);
   useEffect(() => {
     setRemaining([...remainingSet]);
@@ -47,6 +52,7 @@ const App = () => {
           if (abbreviation) {
             if (!has(abbreviation)) {
               setGuessInputStatus("correct");
+              add(abbreviation);
               innerTimeoutId = setTimeout(() => {
                 setGuess("");
               }, timeoutMilliseconds);
