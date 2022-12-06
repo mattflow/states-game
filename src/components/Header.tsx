@@ -40,7 +40,7 @@ const Header = ({ guessedSet, onResetClick }: HeaderProps) => (
           </label>
           <label
             htmlFor="reset-modal"
-            className="btn-sm btn w-16"
+            className="btn-primary btn-sm btn w-16"
             onClick={onResetClick}
           >
             Yes
