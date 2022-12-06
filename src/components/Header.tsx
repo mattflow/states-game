@@ -9,10 +9,10 @@ const Header = ({ guessedSet, onResetClick }: HeaderProps) => (
     <div className="flex items-end justify-between">
       <h1 className="mt-6 text-2xl font-semibold">States Game</h1>
       <div className="space-x-2">
-        <label htmlFor="cheat-modal" className="btn-secondary btn-sm btn">
+        <label htmlFor="cheat-modal" className="btn-sm btn">
           Cheat
         </label>
-        <label htmlFor="reset-modal" className="btn-primary btn-sm btn">
+        <label htmlFor="reset-modal" className="btn-sm btn">
           Reset
         </label>
       </div>
