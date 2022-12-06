@@ -35,10 +35,14 @@ const Header = ({ guessedSet, onResetClick }: HeaderProps) => (
         <h3 className="text-lg font-bold">Reset</h3>
         <p className="pt-4">Are you sure?</p>
         <div className="modal-action">
-          <label htmlFor="reset-modal" className="btn">
+          <label htmlFor="reset-modal" className="btn-sm btn w-16">
             No
           </label>
-          <label htmlFor="reset-modal" className="btn" onClick={onResetClick}>
+          <label
+            htmlFor="reset-modal"
+            className="btn-sm btn w-16"
+            onClick={onResetClick}
+          >
             Yes
           </label>
         </div>
