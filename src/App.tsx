@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useSet } from "react-use";
 import Container from "./components/Container";
 import GuessInput, { GuessInputProps } from "./components/GuessInput";
+import GuessMap from "./components/GuessMap";
 import Header from "./components/Header";
 import Score from "./components/Score";
 import {
+  abbreviationNameMap,
   abbreviationSet,
   formatProperty,
   getAbbreviation,
@@ -30,8 +32,9 @@ const App = () => {
   useEffect(() => {
     setRemaining([...remainingSet]);
   }, [remainingSet]);
+  const [correctStateName, setCorrectStateName] = useState("");
 
-  const timeoutSeconds = 1;
+  const timeoutSeconds = 0.8;
   const timeoutMilliseconds = timeoutSeconds * 1000;
   const [guess, setGuess] = useState("");
   useEffect(() => {
@@ -53,6 +56,10 @@ const App = () => {
             if (!has(abbreviation)) {
               setGuessInputStatus("correct");
               add(abbreviation);
+              const name = abbreviationNameMap.get(abbreviation);
+              if (name) {
+                setCorrectStateName(name);
+              }
               innerTimeoutId = setTimeout(() => {
                 setGuess("");
               }, timeoutMilliseconds);
@@ -80,11 +87,13 @@ const App = () => {
   return (
     <Container>
       <Header />
+      <GuessMap guessedSet={guessedSet} remainingSet={remainingSet} />
       <Score correct={guessed.length} remaining={remaining.length} />
       <GuessInput
         value={guess}
         onChange={onGuessChange}
         status={guessInputStatus}
+        correctStateName={correctStateName}
       />
     </Container>
   );
