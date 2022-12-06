@@ -5,7 +5,7 @@ const App = () => {
     <>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-xl">
-          <h1 className="mt-8 text-center text-2xl font-semibold">
+          <h1 className="mt-6 text-center text-2xl font-semibold">
             States Game
           </h1>
           <div className="mx-1 mt-4 flex justify-between">
