@@ -55,7 +55,7 @@ const GuessInput = ({
           {getIcon(status)}
         </div>
       </div>
-      <div className="ml-2 mt-2 text-sm font-semibold">
+      <div className="ml-2 mt-2 font-semibold">
         <GuessFeedback status={status} correctStateName={correctStateName} />
       </div>
     </div>
