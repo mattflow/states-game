@@ -18,7 +18,7 @@ const GuessMap = ({ guessedSet }: GuessMapProps) => {
               className={`${
                 guessedSet.has(abbreviation)
                   ? "fill-success"
-                  : "fill-gray-400 dark:fill-base-content"
+                  : "fill-gray-300 dark:fill-base-content"
               }`}
               key={abbreviation}
               d={abbreviationDimensionMap.get(abbreviation)}
