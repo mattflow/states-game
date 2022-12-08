@@ -6,11 +6,7 @@ export type GuessMapProps = {
 
 const GuessMap = ({ guessedSet }: GuessMapProps) => {
   return (
-    <svg
-      className="mt-4"
-      viewBox="0 0 959 593"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg viewBox="0 0 959 593" xmlns="http://www.w3.org/2000/svg">
       <g>
         {[...abbreviationSet].map((abbreviation) => {
           return (

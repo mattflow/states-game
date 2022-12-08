@@ -55,6 +55,7 @@ const App = () => {
     const formattedGuess = formatProperty(guess);
     let timeoutId: ReturnType<typeof setTimeout>;
     let innerTimeoutId: ReturnType<typeof setTimeout>;
+
     if (formattedGuess.trim() === "") {
       setGuessInputStatus("empty");
     } else {
@@ -91,10 +92,12 @@ const App = () => {
       clearTimeout(innerTimeoutId);
     };
   }, [guess]);
+
   const onGuessChange: GuessInputProps["onChange"] = (event) => {
     setGuessInputStatus("typing");
     setGuess(event.target.value.toUpperCase());
   };
+
   const [guessInputStatus, setGuessInputStatus] =
     useState<GuessInputProps["status"]>("empty");
 
