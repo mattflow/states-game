@@ -25,7 +25,9 @@ const Header = ({ guessedSet, onResetClick }: HeaderProps) => (
         >
           ✕
         </label>
-        <GuessMap guessedSet={guessedSet} />
+        <div className="my-4">
+          <GuessMap guessedSet={guessedSet} />
+        </div>
       </div>
     </div>
     <input type="checkbox" id="reset-modal" className="modal-toggle" />
