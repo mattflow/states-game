@@ -1,6 +1,6 @@
 # States Game
 
-[states.mattflow.dev](https://mattflow.github.io/states-game)
+[states.mattflow.dev](https://states.mattflow.dev)
 
 A fun drinking game to play with a group of people.
 
