@@ -53,20 +53,21 @@ const App = () => {
   const [guess, setGuess] = useState("");
   useEffect(() => {
     const formattedGuess = formatProperty(guess);
+    const formattedTrimmedGuess = formattedGuess.trim();
     let timeoutId: ReturnType<typeof setTimeout>;
     let innerTimeoutId: ReturnType<typeof setTimeout>;
 
-    if (formattedGuess.trim() === "") {
+    if (formattedTrimmedGuess === "") {
       setGuessInputStatus("empty");
     } else {
       timeoutId = setTimeout(() => {
-        if (formattedGuess.trim() === "") {
+        if (formattedTrimmedGuess === "") {
           setGuessInputStatus("empty");
         } else if (
-          abbreviationSet.has(formattedGuess) ||
-          nameSet.has(formattedGuess)
+          abbreviationSet.has(formattedTrimmedGuess) ||
+          nameSet.has(formattedTrimmedGuess)
         ) {
-          const abbreviation = getAbbreviation(formattedGuess);
+          const abbreviation = getAbbreviation(formattedTrimmedGuess);
           if (abbreviation) {
             if (!guessedSet.has(abbreviation)) {
               setGuessInputStatus("correct");
