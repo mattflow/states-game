@@ -1,4 +1,4 @@
-# States Game
+# States Game v1
 
 [mattflow.github.io/states-game](https://mattflow.github.io/states-game)
 
