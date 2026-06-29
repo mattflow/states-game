@@ -104,6 +104,16 @@ const App = () => {
 
   return (
     <Container>
+      <header className="flex items-center justify-between pt-6">
+        <h1 className="text-xl font-bold tracking-tight">States</h1>
+        <a
+          href="https://sports.mattflow.com"
+          className="link link-hover text-sm opacity-70"
+          title="Play the Sports Game"
+        >
+          Sports ↗
+        </a>
+      </header>
       <Header
         guessedSet={guessedSet}
         onResetClick={() => {
