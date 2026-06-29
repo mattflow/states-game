@@ -1,19 +1,29 @@
 import { abbreviationSet } from "../lib/states";
-import GuessMap from "./GuessMap";
+
+const formatElapsed = (ms: number) => {
+  const total = Math.max(0, Math.floor(ms / 1000));
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const days = Math.floor(total / 86400);
+  const h = Math.floor((total % 86400) / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+  const hms = `${pad(h)}:${pad(m)}:${pad(s)}`;
+  // Keep HH:MM:SS for normal games; prefix days so months-long gaps stay sane.
+  return days > 0 ? `${days}d ${hms}` : hms;
+};
 
 type WinScreenProps = {
+  elapsedMs: number;
   onPlayAgain: () => void;
 };
 
-const WinScreen = ({ onPlayAgain }: WinScreenProps) => (
+const WinScreen = ({ elapsedMs, onPlayAgain }: WinScreenProps) => (
   <div className="mt-8 text-center">
-    <div className="text-6xl">🏆</div>
-    <h2 className="mt-3 text-2xl font-bold">All 50 states</h2>
-    <p className="mt-1 opacity-70">You named every state. Nice work.</p>
-    <div className="my-6">
-      <GuessMap guessedSet={new Set(abbreviationSet)} />
-    </div>
-    <button className="btn-primary btn-sm btn" onClick={onPlayAgain}>
+    <p className="text-lg">
+      You guessed all {abbreviationSet.size} in{" "}
+      <span className="font-semibold tabular-nums">{formatElapsed(elapsedMs)}</span>
+    </p>
+    <button className="btn-ghost btn-sm btn mt-3" onClick={onPlayAgain}>
       Play again
     </button>
   </div>
