@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Container from "./components/Container";
 import DebugMenu from "./components/DebugMenu";
 import GuessInput, { GuessInputProps } from "./components/GuessInput";
@@ -165,6 +165,22 @@ const App = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Mobile-friendly secret trigger: tap the title 5 times quickly.
+  const tapCount = useRef(0);
+  const tapTimer = useRef<ReturnType<typeof setTimeout>>();
+  const onTitleTap = () => {
+    if (tapTimer.current) clearTimeout(tapTimer.current);
+    tapCount.current += 1;
+    if (tapCount.current >= 5) {
+      tapCount.current = 0;
+      setDebug((value) => !value);
+      return;
+    }
+    tapTimer.current = setTimeout(() => {
+      tapCount.current = 0;
+    }, 1500);
+  };
+
   const addRandom = (count: number) => {
     const remainingAbbrs = [...abbreviationSet].filter(
       (abbreviation) => !guessedSet.has(abbreviation)
@@ -180,7 +196,12 @@ const App = () => {
   return (
     <Container>
       <header className="flex items-center justify-between pt-6">
-        <h1 className="text-xl font-bold tracking-tight">States</h1>
+        <h1
+          className="cursor-default select-none text-xl font-bold tracking-tight"
+          onClick={onTitleTap}
+        >
+          States
+        </h1>
         <a
           href="https://sports.mattflow.com"
           className="link link-hover text-sm opacity-70"
